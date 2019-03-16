@@ -11,4 +11,7 @@
 class User < ApplicationRecord
 	has_many :reviews
 	has_many :trips
+
+	validates :email, uniqueness: true
+	validates :name, presence: true
 end

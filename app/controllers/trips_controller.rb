@@ -1,18 +1,16 @@
 class TripsController < ApplicationController
+	def home
+	end
+
+	def new
+		@trip = Trip.new
+	end
 
 	def create
-		trip = Trip.new
-		trip.departure = params['departure'] if params['departure']
-		trip.destination = params['destination'] if params['destination']
-		trip.user_id = params['user_id'] if params['user_id']
-		trip.description = params['description'] if params['description']
-		trip.departure_time = params['departure_time'] if params['departure_time']
-		trip.duration = params['duration'] if params['duration']
-		trip.stops = params['stops'] if params['stops']
-		trip.total_cost = params['total_cost'] if params['total_cost']
-		trip.max_travellers = params['max_travellers'] if params['max_travellers']
-		trip.car_model = params['car_model'] if params['car_model']
-		trip.save
+		@trip = Trip.new(trip_params)
+		@trip.user_id = 1
+		@trip.save
+		redirect_to home_url
 	end
 
 	# (αν είναι δικό μου το session): για να έχει την επιλογή να βάλει φωτογραφία αργότερα
@@ -55,5 +53,11 @@ class TripsController < ApplicationController
 					 car_model: t[7] }
 		end
 		render json: res
+	end
+
+	private
+
+	def trip_params
+		params.require(:trip).permit(:departure, :destination, :description)	
 	end
 end

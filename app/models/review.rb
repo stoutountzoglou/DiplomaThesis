@@ -7,4 +7,6 @@
 class Review < ApplicationRecord
 	belongs_to :trip
 	belongs_to :user
+
+	validates :reviewer_id, :user_id, :trip_id, :rating, :text, presence: true
 end

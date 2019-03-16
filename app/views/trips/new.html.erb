@@ -1,0 +1,17 @@
+<h1>Καταχώρησε ταξίδι!</h1>
+
+<%= form_for @trip do |t| %>
+	<p>
+		<%= t.label :Απο %> <br/>
+		<%= t.text_field :departure %>
+	</p>
+	<p>
+		<%= t.label :Προς %> <br/>
+		<%= t.text_field :destination %>
+	</p>
+	<p>
+		<%= t.label :Περιγραφή %> <br/>
+		<%= t.text_area :description %>
+	</p>
+	<%= t.submit %>
+<%end%>

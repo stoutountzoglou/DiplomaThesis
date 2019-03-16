@@ -13,4 +13,7 @@
 class Trip < ApplicationRecord
 	belongs_to :user
 	has_many :reviews
+
+	validates :departure, :destination, presence: true
+	# , :user_id, :departure_time, :duration, presence: true
 end
