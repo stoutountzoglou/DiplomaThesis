@@ -6,6 +6,6 @@ Rails.application.routes.draw do
 
   resources :trips
   get '/trip_search', to: 'trips#trip_search'
-  get 'home', to: 'trips#home'
+  get 'dashboard', to: 'trips#dashboard'
 
 end

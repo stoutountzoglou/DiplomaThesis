@@ -1,0 +1,20 @@
+<h1>όλα τα ταξίδια</h1>
+<p><%= link_to 'Καταχώρησε ταξίδι', new_trip_path %></p>
+<table>
+	<tr>
+		<th>Από</th>
+		<th>Προς</th>
+		<th>Περιγραφή</th>
+		<th>Oδηγός</th>
+	</tr>
+	<% @trips.each do |trip| %>
+		<tr>
+			<td><%= trip.departure %></td>
+			<td><%= trip.destination %></td>
+			<td><%= trip.description %></td>
+			<td><%= User.find(trip.user_id).name %></td>
+			<td><%= link_to 'Επεξεργασία', edit_trip_path(trip) %></td>
+			<td><%= link_to 'Προβολή', trip_path(trip) %></td>
+		</tr>
+	<% end %>
+</table>

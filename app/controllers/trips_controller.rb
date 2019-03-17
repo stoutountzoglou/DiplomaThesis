@@ -1,7 +1,11 @@
 class TripsController < ApplicationController
-	def home
+	def dashboard
 	end
 
+	def index
+		@trips = Trip.all
+	end
+	
 	def new
 		@trip = Trip.new
 	end
@@ -22,19 +26,18 @@ class TripsController < ApplicationController
 	end
 
 	# (αν είναι δικό μου το session): για να έχει την επιλογή να βάλει φωτογραφία αργότερα
+	def edit
+		@trip = Trip.find(params[:id])
+	end
+
 	def update
-		trip = Trip.find(params['id'].to_i) if params['id']
-		trip.departure = params['departure'] if params['departure']
-		trip.destination = params['destination'] if params['destination']
-		trip.user_id = params['user_id'] if params['user_id']
-		trip.description = params['description'] if params['description']
-		trip.departure_time = params['departure_time'] if params['departure_time']
-		trip.duration = params['duration'] if params['duration']
-		trip.stops = params['stops'] if params['stops']
-		trip.total_cost = params['total_cost'] if params['total_cost']
-		trip.max_travellers = params['max_travellers'] if params['max_travellers']
-		trip.car_model = params['car_model'] if params['car_model']
-		trip.save
+		@trip = Trip.find(params[:id])
+		if @trip.update(trip_params)
+			flash[:notice] = 'Το ταξίδι ανανεώθηκε επιτυχώς!'
+			redirect_to trip_path(@trip)
+		else
+			render 'edit'
+		end
 	end
 
 	def destroy
