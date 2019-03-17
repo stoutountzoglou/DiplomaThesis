@@ -9,8 +9,16 @@ class TripsController < ApplicationController
 	def create
 		@trip = Trip.new(trip_params)
 		@trip.user_id = 1
-		@trip.save
-		redirect_to home_url
+		if @trip.save
+			flash[:notice] = 'Το ταξίδι καταχωρήθηκε επιτυχώς!'
+			redirect_to trip_path(@trip)
+		else
+			render 'new'
+		end
+	end
+
+	def show
+		@trip = Trip.find(params[:id])
 	end
 
 	# (αν είναι δικό μου το session): για να έχει την επιλογή να βάλει φωτογραφία αργότερα

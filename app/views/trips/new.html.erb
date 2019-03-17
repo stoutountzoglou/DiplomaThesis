@@ -1,5 +1,14 @@
 <h1>Καταχώρησε ταξίδι!</h1>
 
+<% if @trip.errors.any? %>
+<h3> Kαταχώρηση απέτυχε! </h1>
+<ul>
+	<% @trip.errors.full_messages.each do |msg| %>
+	<li><%= msg %></li>
+	<% end %>	
+</ul>
+<% end %>
+
 <%= form_for @trip do |t| %>
 	<p>
 		<%= t.label :Απο %> <br/>
